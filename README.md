@@ -1,10 +1,10 @@
 # gui.set_screen_position()
 
-gui.set_screen_position() and gui.screen_pos_to_node_pos() function for Defold.
+gui.set_screen_position() and gui.screen_pos_to_node_pos() functions for Defold.
 This library will be useful if you want to get screen position of the node and set this position for another node with the different parent of even in another component.
 
 ## Installation
-You can use Defold-Screenshot in your own project by adding this project as a [Defold library dependency](http://www.defold.com/manuals/libraries/). Open your game.project file and in the dependencies field under project add:
+You can use this library in your own project by adding this project as a [Defold library dependency](http://www.defold.com/manuals/libraries/). Open your game.project file and in the dependencies field under project add:
 
   https://github.com/AGulev/set_screen_position/archive/master.zip
 
