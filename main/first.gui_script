@@ -1,0 +1,45 @@
+local gui_extra_functions = require "main.gui_extra_functions"
+
+function init(self)
+	--init gui_extra_functions, with all possible layouts
+	gui_extra_functions.init({
+		[hash("Standart")] = {
+			width = 960,
+			height = 640
+		},
+		[hash("Portrait")] = {
+			width = 720,
+			height = 1280
+		},
+		[hash("Landscape")] = {
+			width = 1280,
+			height = 720
+		},
+	})
+	self.current_layout = gui.get_layout()
+	--get all nodes
+	self.nodes = {
+		gui.get_node("anchor"),
+		gui.get_node("zoom"),
+		gui.get_node("stretch"),
+		gui.get_node("terget")
+	}
+	self.next = 1
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("set_random_node_to") then
+		local next_node = self.nodes[self.next]
+		self.next = self.next + 1
+		self.next = self.next > #self.nodes and 1 or self.next
+		gui.set_screen_position(next_node, message.screen_pos, self.current_layout)
+	elseif message_id == hash("move_random_node_to") then
+		local next_node = self.nodes[self.next]
+		self.next = self.next + 1
+		self.next = self.next > #self.nodes and 1 or self.next
+		local local_node_pos = gui.screen_pos_to_node_pos(message.screen_pos, next_node, self.current_layout)
+		gui.animate(next_node, gui.PROP_POSITION, local_node_pos, gui.EASING_LINEAR, 1)
+	elseif message_id == hash("layout_changed") then
+		self.current_layout = message.id
+	end
+end

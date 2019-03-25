@@ -1,0 +1,16 @@
+[bootstrap]
+main_collection = /main/main.collectionc
+render = /main/default.renderc
+
+[script]
+shared_state = 1
+
+[display]
+width = 960
+height = 640
+display_profiles = /main/main.display_profilesc
+
+[project]
+title = set_screen_position
+dependencies = 
+

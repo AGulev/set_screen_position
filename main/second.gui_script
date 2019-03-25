@@ -1,0 +1,19 @@
+function init(self)
+	self.nodes = {
+		gui.get_node("n1"),
+		gui.get_node("n2"),
+		gui.get_node("n3")
+	}
+	msg.post(".", "acquire_input_focus")
+	self.next = 1
+end
+
+function on_input(self, action_id, action)
+	if action_id == hash("click") and action.pressed then
+		local next_node = self.nodes[self.next]
+		self.next = self.next + 1
+		self.next = self.next > #self.nodes and 1 or self.next
+		local event = self.next%2 == 1 and "move_random_node_to" or "set_random_node_to"
+		msg.post("/first_gui#first", event, {screen_pos = gui.get_screen_position(next_node)})
+	end
+end
