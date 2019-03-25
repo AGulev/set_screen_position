@@ -34,7 +34,7 @@ end
 
 #### Without Layouts
 
-If you don't use layouts, then just call init() method in any gui_script:
+If you don't use layouts, then just call init() method in any gui_script once:
 ```lua
 -- any gui_script file
 local gui_extra_functions = require "gui_extra_functions.gui_extra_functions"
