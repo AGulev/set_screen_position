@@ -14,3 +14,6 @@ display_profiles = /main/main.display_profilesc
 title = set_screen_position
 dependencies = 
 
+[library]
+include_dirs = gui_extra_functions
+

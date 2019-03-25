@@ -1,4 +1,4 @@
-local gui_extra_functions = require "main.gui_extra_functions"
+local gui_extra_functions = require "gui_extra_functions.gui_extra_functions"
 
 --
 -- projection that centers content with maintained aspect ratio and optional zoom

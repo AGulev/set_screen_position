@@ -81,21 +81,21 @@ local function screen_to_gui(pos, adj_mode, anch_x, anch_y, layout)
 	end
 end
 
-local function set_screen_position(node, screen_position, layout_id)
+local function set_screen_position(node, screen_position)
 	local parent = gui.get_parent(node)
 	gui.set_parent(node, nil)
 	local mode = gui.get_adjust_mode(node)
 	local anch_x = gui.get_xanchor(node) ~= gui.ANCHOR_NONE and true or false
 	local anch_y = gui.get_yanchor(node) ~= gui.ANCHOR_NONE and true or false
 	
-	local layout = get_layout(layout_id) or M.default_layout
+	local layout = get_layout(gui.get_layout()) or M.default_layout
 	local converted_v = vmath.vector3(screen_position)
 	screen_to_gui(converted_v, mode, anch_x, anch_y, layout)
 	gui.set_position(node, converted_v)
 	gui.set_parent(node, parent, true)
 end
 
-local function screen_pos_to_node_pos(screen_position, node, layout_id)
+local function screen_pos_to_node_pos(screen_position, node)
 	local position_before = gui.get_position(node)
 	local parent = gui.get_parent(node)
 	gui.set_parent(node, nil)
@@ -103,7 +103,7 @@ local function screen_pos_to_node_pos(screen_position, node, layout_id)
 	local anch_x = gui.get_xanchor(node) ~= gui.ANCHOR_NONE and true or false
 	local anch_y = gui.get_yanchor(node) ~= gui.ANCHOR_NONE and true or false
 
-	local layout = get_layout(layout_id) or M.default_layout
+	local layout = get_layout(gui.get_layout()) or M.default_layout
 	local converted_v = vmath.vector3(screen_position)
 	screen_to_gui(converted_v, mode, anch_x, anch_y, layout)
 	gui.set_position(node, converted_v)
