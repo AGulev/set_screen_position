@@ -6,6 +6,8 @@ local M = {
 	default_layout = nil
 }
 
+local EMPTY = hash("")
+
 local function recalculate_layout(layout)
 	local fit, zoom, stretch = layout[gui.ADJUST_FIT], layout[gui.ADJUST_ZOOM], layout[gui.ADJUST_STRETCH]
 	local sx, sy = M.win_x / layout.config_x, M.win_y / layout.config_y
@@ -27,7 +29,7 @@ local function recalculate_layout(layout)
 end
 
 local function get_layout(name)
-	if not name then return nil end
+	if not name or name == EMPTY then return nil end
 	
 	local layout = M.layouts[name]
 	if not layout then
