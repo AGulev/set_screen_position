@@ -9,7 +9,7 @@ You can use this library in your own project by adding this project as a [Defold
   https://github.com/AGulev/set_screen_position/archive/master.zip
 
 
-First of all, we need to recalculate all coefficient when you change screen size, that why we need to add a few lines into render_script:
+First of all, we need to recalculate all coefficient when you change screen size, that why we need to add a few lines into `render_script`:
 
 ```lua
 -- require the module
