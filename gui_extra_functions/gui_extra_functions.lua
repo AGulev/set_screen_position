@@ -60,6 +60,34 @@ local function get_layout(name)
 	return layout
 end
 
+local correction = vmath.vector3(0)
+local function correct_size_for_pivot(pivot, size)
+	correction.x = 0
+	correction.y = 0
+	if gui.PIVOT_E == pivot then
+		correction.x = size.x * 0.5
+	elseif gui.PIVOT_N == pivot then
+		correction.y = size.y * 0.5
+	elseif gui.PIVOT_NE == pivot then
+		correction.y = size.y * 0.5
+		correction.x = size.x * 0.5
+	elseif gui.PIVOT_NW == pivot then
+		correction.y = size.y * 0.5
+		correction.x = -size.x * 0.5
+	elseif gui.PIVOT_S == pivot then
+		correction.y = -size.y * 0.5
+	elseif gui.PIVOT_SE == pivot then
+		correction.x = size.x * 0.5
+		correction.y = -size.y * 0.5
+	elseif gui.PIVOT_SW == pivot then
+		correction.x = -size.x * 0.5
+		correction.y = -size.y * 0.5
+	elseif gui.PIVOT_W == pivot then
+		correction.x = -size.x * 0.5
+	end
+	return correction
+end
+
 --call this method in render_script when change windows size
 function M.update_coef(width, height)
 	M.win_x = width
@@ -93,6 +121,15 @@ local function set_screen_position(node, screen_position)
 	local layout = get_layout(gui.get_layout()) or M.default_layout
 	local converted_v = vmath.vector3(screen_position)
 	screen_to_gui(converted_v, mode, anch_x, anch_y, layout)
+
+	local pivot = gui.get_pivot(node)
+	if pivot ~= gui.PIVOT_CENTER then
+		local size = gui.get_size(node)
+		local correction = correct_size_for_pivot(pivot, size)
+		converted_v.x = converted_v.x + correction.x
+		converted_v.y = converted_v.y + correction.y
+	end
+	
 	gui.set_position(node, converted_v)
 	gui.set_parent(node, parent, true)
 end
