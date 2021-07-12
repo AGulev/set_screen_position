@@ -79,7 +79,8 @@ end
 local screen_pos = gui.get_screen_position(some_node_with_difficult_hierarchy)
 
 -- set screen position for another node
-gui.set_screen_position(some_other_node, screen_pos)
+gui.set_screen_position(some_other_node, screen_pos, recalculate_pivot)
+-- recalculate_pivot is optional for cases when you get position using gui.get_screen_position() from node with non-centred pivot
 
 -- or convert screen position to position relative to this node,
 -- for example,  for gui.animate()
