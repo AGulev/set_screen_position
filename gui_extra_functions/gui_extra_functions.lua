@@ -111,7 +111,7 @@ local function screen_to_gui(pos, adj_mode, anch_x, anch_y, layout)
 	end
 end
 
-local function set_screen_position(node, screen_position)
+local function set_screen_position(node, screen_position, recalculate_pivot)
 	local parent = gui.get_parent(node)
 	gui.set_parent(node, nil)
 	local mode = gui.get_adjust_mode(node)
@@ -123,7 +123,7 @@ local function set_screen_position(node, screen_position)
 	screen_to_gui(converted_v, mode, anch_x, anch_y, layout)
 
 	local pivot = gui.get_pivot(node)
-	if pivot ~= gui.PIVOT_CENTER then
+	if pivot ~= gui.PIVOT_CENTER and recalculate_pivot then
 		local size = gui.get_size(node)
 		local correction = correct_size_for_pivot(pivot, size)
 		converted_v.x = converted_v.x + correction.x
