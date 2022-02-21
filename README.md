@@ -1,3 +1,6 @@
+# Deprecated. In [Defold 1.2.193](https://forum.defold.com/t/defold-1-2-193-beta/70405) these functions are builtin.
+
+
 # gui.set_screen_position()
 
 gui.set_screen_position() and gui.screen_pos_to_node_pos() functions for Defold.
